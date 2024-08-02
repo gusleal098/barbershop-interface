@@ -54,12 +54,7 @@ export const RightContainer = styled.div `
 export const Title = styled.h2 `
     font-family: "Anton SC", sans-serif;
     font-size: 30px;
-    color: #ffffff;
-
-    span {
-        color: #ffc222;
-        font-family: "Anton SC", sans-serif;
-    }
+    color: #ffc222;
 `
 
 export const Form = styled.form `
