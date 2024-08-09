@@ -1,7 +1,16 @@
-// import { Route, Redirect } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import PropTypes from 'prop-types'
 
-// function PrivateRoute({element, ...rest}) {
+function PrivateRoute({ children }) {
 
-// }
+    const user = localStorage.getItem('barbershop:userData')
 
-// export default PrivateRoute
+    return user ? children : <Navigate to="/login" replace />
+
+}
+
+export default PrivateRoute
+
+PrivateRoute.propTypes = {
+    children: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
+}

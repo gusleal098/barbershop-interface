@@ -5,13 +5,13 @@ export const ContainerButton = styled.button`
     height: 52px;
     border: 0;
     border-radius: 5px;
-    background: #ffc222;
+    background: #000000;
     font-family: "Anton SC", sans-serif;
     font-size: 25px;
     color: #ffffff;
 
     &:hover {
-        background-color: #ffb300;
+        background-color: #1f1f1f;
         border: 1px solid #ffffff;
     }
 `

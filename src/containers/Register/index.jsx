@@ -6,14 +6,13 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
 import Logo from '../../assets/logo-play.png'
-import { Button } from '../../components/Button'
+import { Button } from '../../components'
 
 import {
     Container,
     Form,
     InputContainer,
-    LeftContainer,
-    RightContainer,
+    CenterContainer,
     Title,
     Link
 
@@ -87,10 +86,8 @@ export function Register() {
 
     return (
         <Container>
-            <LeftContainer>
+            <CenterContainer>
                 <img src={Logo} alt="logo-play"/>
-            </LeftContainer>
-            <RightContainer>
                 <Title>
                     Criar conta
                 </Title>
@@ -128,7 +125,7 @@ export function Register() {
                     <Button type="submit">Cadastrar</Button>
                 </Form>
                 <p>Já possui conta? <Link to="/login">Clique aqui</Link></p>
-            </RightContainer>
+            </CenterContainer>
         </Container>
     )
 }

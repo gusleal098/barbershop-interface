@@ -7,14 +7,13 @@ import { useNavigate } from 'react-router-dom'
 import { useUser } from '../../hooks/UserContext'
 
 import Logo from '../../assets/logo-play.png'
-import { Button } from '../../components/Button'
+import { Button } from '../../components'
 
 import {
     Container,
     Form,
     InputContainer,
-    LeftContainer,
-    RightContainer,
+    CenterContainer,
     Title,
     Link
 
@@ -60,8 +59,8 @@ export function Login() {
                 success: {
                     render() {
                         setTimeout(() => {
-                            // navigate('/')
-                        }, 2000)
+                            navigate('/')
+                        }, 1000)
                         return `Seja bem-vindo!`
                     }
                 },
@@ -70,19 +69,14 @@ export function Login() {
         )
 
         putUserData(response.data)
-        console.log(response.data)
     }
 
     return (
         <Container>
-            <LeftContainer>
+            <CenterContainer>
                 <img src={Logo} alt="logo-play"/>
-            </LeftContainer>
-            <RightContainer>
                 <Title>
-                    O TRATAMENTO IDEAL PARA VOCÊ <span>É AQUI!</span>
-                    <br />
-                     Acesse com seu <span> Login e senha.</span>
+                    ACESSAR CONTA
                 </Title>
                 <Form onSubmit={handleSubmit(onSubmit)}>
                     <InputContainer>
@@ -100,7 +94,7 @@ export function Login() {
                     <Button type="submit">Entrar</Button>
                 </Form>
                 <p>Não possui conta? <Link to="/cadastro">Clique aqui</Link></p>
-            </RightContainer>
+            </CenterContainer>
         </Container>
     )
 }

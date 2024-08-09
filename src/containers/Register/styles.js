@@ -1,44 +1,52 @@
 import styled from "styled-components";
 import { Link as ReactLink } from "react-router-dom";
 
-import BackgroundLogin from '../../assets/background-login.png'
 import Background from '../../assets/background.png'
+import BackgroundContainer from '../../assets/background-login.png'
 
 export const Container = styled.div `
     display: flex;
     height: 100vh;
     width: 100vw;
-`
-
-export const LeftContainer = styled.div `
-    background: url('${BackgroundLogin}');
-    background-size: cover;
-    background-position: center;
-
-    height: 100%;
-    width: 100%;
-    max-width: 50%;
-
-    display: flex;
     align-items: center;
     justify-content: center;
-    
-    img {
-        width: 50%;
-    }
+    background: url('${Background}');
 `
 
-export const RightContainer = styled.div `
+// export const LeftContainer = styled.div `
+//     background: url('${BackgroundLogin}');
+//     background-size: cover;
+//     background-position: center;
+
+//     height: 100%;
+//     width: 100%;
+//     max-width: 50%;
+
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+    
+//     img {
+//         width: 50%;
+//     }
+// `
+
+export const CenterContainer = styled.div `
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    border-radius: 20px;
 
-    height: 100%;
-    width: 100%;
-    max-width: 50%;
+    height: 95%;
+    width: 500px;
 
-    background: url('${Background}');
+    background: url('${BackgroundContainer}');
+
+    img {
+        width: 20%;
+        margin-bottom: 10px;
+    }
 
     p {
         color: #ffffff;
@@ -53,14 +61,16 @@ export const RightContainer = styled.div `
 
 export const Title = styled.h2 `
     font-family: "Anton SC", sans-serif;
-    font-size: 30px;
-    color: #ffc222;
+    font-size: 20px;
+    color: #ffffff;
+    border-radius: 10px;
+    padding: 0 10px;
 `
 
 export const Form = styled.form `
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     padding: 20px;
     width: 100%;
     max-width: 400px;
@@ -75,7 +85,7 @@ export const InputContainer = styled.div `
     input {
         width: 100%;
         border: none;
-        height: 52px;
+        height: 45px;
         border-radius: 5px;
         padding: 0 16px;
     }

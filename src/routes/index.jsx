@@ -1,14 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Login } from "../containers/Login";
-import { Register } from "../containers/Register";
-import { Home } from "../containers/Home";
-// import PrivateRoute from "./private-route";
+import { Login, Register, Home, Cart } from "../containers";
+import PrivateRoute from "./private-route";
 
 export const router = createBrowserRouter([
-    {
-        path: '/',
-        element: <Home />
-    },
     {
         path: '/login',
         element: <Login />
@@ -16,5 +10,21 @@ export const router = createBrowserRouter([
     {
         path: '/cadastro',
         element: <Register />
-    }
+    },
+    {
+        path: '/',
+        element: (
+            <PrivateRoute>
+                <Home />
+            </PrivateRoute>
+        )
+    },
+    {
+        path: '/carrinho',
+        element: (
+            <PrivateRoute>
+                <Cart />
+            </PrivateRoute>
+        )
+    },
 ])
