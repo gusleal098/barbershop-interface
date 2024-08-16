@@ -1,19 +1,27 @@
 import PropTypes from 'prop-types'
 
-import { useCart } from '../../hooks/CartContext'
+import { useNavigate } from 'react-router-dom'
+
+import { useTime } from '../../hooks/TimeContext'
 
 import {
     Container,
-    TimesButton
+    TimesButton,
 
 } from './styles'
 
 export function CardTime({ time }) {
-    const { putProductInCart } = useCart()
+    const { putTimeInCart } = useTime()
+    const navigate = useNavigate()
+
+    const handleButtonClick = () => {
+        putTimeInCart(time)
+        navigate('/carrinho')
+    }
 
     return (
         <Container>
-                <TimesButton onClick={() => putProductInCart(time)}>
+                <TimesButton onClick={handleButtonClick}>
                     {time.time}
                 </TimesButton>
         </Container>

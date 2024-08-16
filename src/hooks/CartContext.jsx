@@ -7,6 +7,14 @@ const CartContext = createContext({})
 export const CartProvider = ({children}) => {
     const [cartProducts, setCartProducts] = useState([])
 
+    const updateLocalStorage = async products => {
+        await localStorage.setItem('barbershop:cartInfo', JSON.stringify(products))
+    }
+
+    const deleteLocalStorage = async products => {
+        await localStorage.removeItem('barbershop:cartInfo', JSON.stringify(products))
+    }
+
     const putProductInCart = async product => {
         const cartIndex = cartProducts.findIndex(prd => prd.id === product.id)
 
@@ -25,10 +33,22 @@ export const CartProvider = ({children}) => {
         }
 
 
-        await localStorage.setItem(
-            'barbershop:cartInfo', 
-            JSON.stringify(newCartProducts))
+        await updateLocalStorage(newCartProducts)
 
+    }
+
+    const deleteProducts = async productId => {
+        const newCart = cartProducts.filter(product => product.id != productId)
+
+        setCartProducts(newCart)
+
+        await updateLocalStorage (newCart)
+    }
+
+    const clearCart = async () => {
+        setCartProducts([])
+
+        await deleteLocalStorage([])
     }
 
     useEffect(() => {
@@ -44,7 +64,13 @@ export const CartProvider = ({children}) => {
     }, [])
 
     return (
-        <CartContext.Provider value={{putProductInCart, cartProducts}}>
+        <CartContext.Provider value={{
+            putProductInCart, 
+            cartProducts,
+            deleteProducts,
+            clearCart
+        }}
+        >
             {children}
         </CartContext.Provider>
     )

@@ -5,16 +5,15 @@ export const Container = styled.div `
     box-shadow: 0px 30px 60px rgba(57, 57, 57, 0.1);
     border-radius: 30px;
     display: flex;
+    padding: 16px;
     gap: 12px;
-    padding: 16px  0;
-    width: max-content;
-    min-width: 400px;
-    justify-content: center;
+    justify-content: space-evenly;
 
     div {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        min-width: 200px;
     }
 `
 

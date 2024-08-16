@@ -24,7 +24,7 @@ import {
 export function Login() {
     const { putUserData } = useUser()
 
-    const navigate = useNavigate() 
+    const navigate = useNavigate()
 
     const schema = Yup
         .object({
@@ -59,7 +59,11 @@ export function Login() {
                 success: {
                     render() {
                         setTimeout(() => {
-                            navigate('/')
+                            if (response.data.admin) {
+                                navigate('/agendamentos')
+                            } else {
+                                navigate('/')
+                            }
                         }, 1000)
                         return `Seja bem-vindo!`
                     }
@@ -74,7 +78,7 @@ export function Login() {
     return (
         <Container>
             <CenterContainer>
-                <img src={Logo} alt="logo-play"/>
+                <img src={Logo} alt="logo-play" />
                 <Title>
                     ACESSAR CONTA
                 </Title>
@@ -90,7 +94,7 @@ export function Login() {
                         <input type="password" {...register("password")} />
                         <p>{errors?.password?.message}</p>
                     </InputContainer>
-                    
+
                     <Button type="submit">Entrar</Button>
                 </Form>
                 <p>Não possui conta? <Link to="/cadastro">Clique aqui</Link></p>

@@ -17,4 +17,3 @@ export const TimesButton = styled.button `
         border: 1px solid #ffffff;
     }
 `
-

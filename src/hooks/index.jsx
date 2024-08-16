@@ -4,10 +4,13 @@ import PropTypes from 'prop-types'
 
 import { UserProvider } from "./UserContext";
 import { CartProvider } from "./CartContext";
+import { TimeProvider } from "./TimeContext";
 
 const AppProvider = ({ children }) => (
     <UserProvider>
-        <CartProvider>{children}</CartProvider>
+        <CartProvider>
+            <TimeProvider>{children}</TimeProvider>
+        </CartProvider>
     </UserProvider>
 )
 

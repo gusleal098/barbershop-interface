@@ -15,3 +15,14 @@ export const ContainerButton = styled.button`
         border: 1px solid #ffffff;
     }
 `
+
+export const ContainerButtonDisabled = styled.button`
+    width: 100%;
+    height: 52px;
+    border: 0;
+    border-radius: 5px;
+    background: #d3d3d3;
+    font-family: "Anton SC", sans-serif;
+    font-size: 25px;
+    color: #ffffff;
+`

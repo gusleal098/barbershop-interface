@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Login, Register, Home, Cart } from "../containers";
+import { Login, Register, Home, Cart, Admin } from "../containers";
 import PrivateRoute from "./private-route";
 
 export const router = createBrowserRouter([
@@ -24,6 +24,24 @@ export const router = createBrowserRouter([
         element: (
             <PrivateRoute>
                 <Cart />
+            </PrivateRoute>
+        )
+    },
+
+    {
+        path: '/agendamentos',
+        element: (
+            <PrivateRoute isAdmin>
+                <Admin />
+            </PrivateRoute>
+        )
+    },
+
+    {
+        path: '/listar-serviços',
+        element: (
+            <PrivateRoute isAdmin>
+                <Admin />
             </PrivateRoute>
         )
     },

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 
-import { ContainerButton } from "./styles"
+import { ContainerButton, ContainerButtonDisabled } from "./styles"
 
 
 export function Button({children, ...props}) {
@@ -9,6 +9,16 @@ export function Button({children, ...props}) {
     )
 }
 
+export function ButtonDisabled({children, ...props}) {
+    return (
+        <ContainerButtonDisabled {...props}>{children}</ContainerButtonDisabled>
+    )
+}
+
 Button.propTypes = {
+    children: PropTypes.string
+}
+
+ButtonDisabled.propTypes = {
     children: PropTypes.string
 }

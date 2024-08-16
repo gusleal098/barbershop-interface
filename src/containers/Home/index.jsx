@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react'
+
+import Carousel from 'react-elastic-carousel'
+
 import { api } from '../../services/api'
 import { CardProduct, CardTime } from '../../components'
+
 import formatCurrency from '../../utils/formatCurrency'
+
+import { useCart } from '../../hooks/CartContext'
 
 import CapaHome from '../../assets/capa.jpg'
 
@@ -32,6 +38,8 @@ export function Home() {
     const [activeCategory, setActiveCategory] = useState(0)
     const [filteredTimes, setFilteredTimes] = useState([])
     const [activeDate, setActiveDate] = useState(0)
+    const [scheduleTimes, setScheduleTimes] = useState([])
+    const {cartProducts} = useCart()
 
     useEffect(() => {
 
@@ -56,7 +64,23 @@ export function Home() {
         async function loadDates() {
             const { data } = await api.get('dates')
             
-            setDates(data)
+            const today = new Date().toISOString().split('T')[0]
+
+            const filteredDates = data.filter( date => {
+                return date.date >= today
+            })
+            
+            setDates(filteredDates)
+
+            const todayDate = filteredDates.find(date => date.date === today)
+            // const todayDate = new Date().toISOString().split('T')[-0]
+
+            //const todayDate = data.find(date => date.date ===today)
+            if (todayDate) {
+                setActiveDate(todayDate.id)
+            } else if (filteredDates.length > 0) {
+                setActiveDate(filteredDates[0].id)
+            }
         }
 
         async function loadTimes() {
@@ -65,10 +89,17 @@ export function Home() {
             setTimes(data)
         }
 
+        async function loadScheduleTimes() {
+            const { data } = await api.get('schedules')
+
+            setScheduleTimes(data)
+        }
+
         loadProducts()
         loadCategories()
         loadDates()
         loadTimes()
+        loadScheduleTimes()
     }, [])
 
     useEffect(() => {
@@ -87,13 +118,24 @@ export function Home() {
         if (activeDate === 0) {
             setFilteredTimes([])
         } else {
-            const newFilteredTimes = times.filter(
-                time => time.date_id === activeDate
-            )
+            const newFilteredTimes = times.filter(time => {
+                const isSchedule = scheduleTimes.some(schedule => {
+                    return schedule.times.some(scheduleTime => scheduleTime.id === time.id)
+                })
+                return time.date_id === activeDate && !isSchedule
+            })
 
             setFilteredTimes(newFilteredTimes)
         }
-    }, [activeDate, times])
+    }, [activeDate, times, scheduleTimes])
+
+    const breakPoints = [
+        { width: 1, itemsToShow: 1},
+        { width: 400, itemsToShow: 2},
+        { width: 600, itemsToShow: 3},
+        { width: 900, itemsToShow: 4},
+        { width: 1300, itemsToShow: 5},
+    ]
 
     return (
         <Container>
@@ -101,12 +143,12 @@ export function Home() {
 
             <ContainerBody>                
                 <LeftContainer>
-                    <CategoriesMenu>
+                    <Carousel itemsToShow={5} style={{width: '70%', marginTop: 30}} breakPoints={breakPoints}>
                         {categories && categories.map(category => (
                             <CategoryButton 
                                 type='button' 
                                 key={category.id}
-                                isActiveCategory={activeCategory === category.id}
+                                $isActiveCategory={activeCategory === category.id}
                                 onClick={() => { 
                                     setActiveCategory(category.id) 
                                 }}
@@ -114,44 +156,47 @@ export function Home() {
                                 {category.name}
                             </CategoryButton>
                         ))}
-                    </CategoriesMenu>
+                    </Carousel>
                     <ProductsContainer>
                         {filteredProducts && filteredProducts.map(product => (
                             <CardProduct key={product.id} product={product} />
                         ))}
                     </ProductsContainer>
                 </LeftContainer>
+
                 <RightContainer>
-                    <DatesMenu>
-                        {dates && dates.map(date => (
-                            <DateButton
-                            type='button'
-                            key={date.id}
-                            isActiveDate={activeDate === date.id}
-                            onClick={() => {
-                                setActiveDate(date.id)
-                            }}
-                            >
-                                {formatDate(date.date)}
-                            </DateButton>
-                        ))}
-                    </DatesMenu>
+                        <Carousel itemsToShow={5} style={{width: '70%', marginTop: 30}} breakPoints={breakPoints}>
+                            {dates && dates.map(date => (
+                                <DateButton
+                                type='button'
+                                key={date.id}
+                                $isActiveDate={activeDate === date.id}
+                                onClick={() => {
+                                    setActiveDate(date.id)
+                                }}
+                                >
+                                    {formatDate(date.date)}
+                                </DateButton>
+                            ))}
+                        </Carousel>
                     
-                    <TimesContainer>
-                        {activeDate === 0 ? (
-                            <EmptyTimes>Selecione uma data</EmptyTimes>
-                        ) : filteredTimes.length > 0 ? (
-                        
-                            <Body>
-                                {filteredTimes.map(time => (
-                                    <CardTime key={time.id} time={time}/>
-                                ))}
-                            </Body>
-                        ) : (
-                            <EmptyTimes>Não há horários disponíveis nesta data</EmptyTimes>
-                            )
-                        }
-                    </TimesContainer>
+                        <TimesContainer>
+                            {cartProducts && cartProducts.length > 0 ? (
+                                
+                                filteredTimes.length > 0 ? (
+                                    <Body>
+                                        {filteredTimes.map(time => (
+                                            <CardTime key={time.id} time={time}/>
+                                        ))}
+                                    </Body>
+                                ) : (
+                                    <EmptyTimes>Não há horários disponíveis nesta data</EmptyTimes>
+                                    )
+                            ) : (
+                                <p>Escolha um serviço</p>
+                            )}
+                            </TimesContainer>
+                    
                 </RightContainer>
             </ContainerBody>
         </Container>
