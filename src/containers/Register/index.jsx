@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 
 import Logo from '../../assets/logo-play.png'
-import { Button } from '../../components'
+import { Button, ErrorMessage } from '../../components'
 
 import {
     Container,
@@ -95,36 +95,36 @@ export function Register() {
                     <InputContainer>
                         <label>Nome</label>
                         <input type="text" {...register("name")} />
-                        <p>{errors?.name?.message}</p>
+                        <ErrorMessage>{errors?.name?.message}</ErrorMessage>
                     </InputContainer>
 
                     <InputContainer>
                         <label>Email</label>
                         <input type="email" {...register("email")} />
-                        <p>{errors?.email?.message}</p>
+                        <ErrorMessage>{errors?.email?.message}</ErrorMessage>
                     </InputContainer>
 
                     <InputContainer>
                         <label>Número de telefone</label>
                         <input type="tel" {...register("phone_number")} />
-                        <p>{errors?.phone_number?.message}</p>
+                        <ErrorMessage>{errors?.phone_number?.message}</ErrorMessage>
                     </InputContainer>
 
                     <InputContainer>
                         <label>Senha</label>
                         <input type="password" {...register("password")} />
-                        <p>{errors?.password?.message}</p>
+                        <ErrorMessage>{errors?.password?.message}</ErrorMessage>
                     </InputContainer>
 
                     <InputContainer>
                         <label>Confirmar senha</label>
                         <input type="password" {...register("confirmPassword")} />
-                        <p>{errors?.confirmPassword?.message}</p>
+                        <ErrorMessage>{errors?.confirmPassword?.message}</ErrorMessage>
                     </InputContainer>
                     
                     <Button type="submit">Cadastrar</Button>
                 </Form>
-                <p>Já possui conta? <Link to="/login">Clique aqui</Link></p>
+                <p className='p'>Já possui conta? <Link to="/login">Clique aqui</Link></p>
             </CenterContainer>
         </Container>
     )

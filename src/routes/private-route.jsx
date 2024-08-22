@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import PropTypes from 'prop-types'
-import { Header } from '../components'
+import { Header, Footer } from '../components'
 
 function PrivateRoute({ children, isAdmin }) {
 
@@ -17,6 +17,7 @@ function PrivateRoute({ children, isAdmin }) {
                 <>
                     <Header />
                     {children}
+                    <Footer />
                 </>
             )
         }

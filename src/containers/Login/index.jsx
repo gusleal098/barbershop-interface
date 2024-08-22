@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useUser } from '../../hooks/UserContext'
 
 import Logo from '../../assets/logo-play.png'
-import { Button } from '../../components'
+import { Button, ErrorMessage } from '../../components'
 
 import {
     Container,
@@ -15,7 +15,7 @@ import {
     InputContainer,
     CenterContainer,
     Title,
-    Link
+    Link,
 
 } from "./styles"
 
@@ -86,18 +86,18 @@ export function Login() {
                     <InputContainer>
                         <label>Email</label>
                         <input type="email" {...register("email")} />
-                        <p>{errors?.email?.message}</p>
+                        <ErrorMessage>{errors?.email?.message}</ErrorMessage>
                     </InputContainer>
 
                     <InputContainer>
                         <label>Senha</label>
                         <input type="password" {...register("password")} />
-                        <p>{errors?.password?.message}</p>
+                        <ErrorMessage>{errors?.password?.message}</ErrorMessage>
                     </InputContainer>
 
                     <Button type="submit">Entrar</Button>
                 </Form>
-                <p>Não possui conta? <Link to="/cadastro">Clique aqui</Link></p>
+                <p className='p'>Não possui conta? <Link to="/cadastro">Clique aqui</Link></p>
             </CenterContainer>
         </Container>
     )

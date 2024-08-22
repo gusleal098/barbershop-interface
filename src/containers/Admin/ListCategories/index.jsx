@@ -9,35 +9,53 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom'
 
-import formatCurrency from '../../../utils/formatCurrency'
+import { toast } from 'react-toastify'
+
+import Trash from '../../../assets/trash.png'
 
 import { paths } from '../../../constants/paths'
 
 import { api } from '../../../services/api'
 import {
     Container,
-    Img,
     EditIconStyle
 
 } from './styles'
 
-function ListProducts() {
-    const [products, setProducts] = useState([])
+function ListCategories() {
+    const [categories, setCategories] = useState([])
 
     const navigate = useNavigate()
 
     useEffect(() => {
-        async function loadProducts() {
-            const { data } = await api.get('products')
+        async function loadCategories() {
+            const { data } = await api.get('categories')
 
-            setProducts(data)
+            setCategories(data)
         }
 
-        loadProducts()
+        loadCategories()
     }, [])
 
-    function editProduct(product) {
-        navigate(paths.EditProduct, {state: {product}})
+    function editCategory(product) {
+        navigate(paths.EditCategory, {state: {product}})
+    }
+
+    async function deleteCategory(categoryId) {
+        try {
+            await toast.promise(
+                api.delete(`categories/${categoryId}`),
+                {
+                    pending: 'Deletando categoria...',
+                    success: 'Categoria deletada com sucesso!',
+                    error: 'Falha ao deletar a categoria.',
+                }
+            )
+
+            setCategories(prevCategories => prevCategories.filter(category => category.id !== categoryId))
+        } catch (error) {
+            console.error('Erro ao deletar categoria:', error)
+        }
     }
 
     return (
@@ -46,32 +64,23 @@ function ListProducts() {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
-                            <TableCell></TableCell>
                             <TableCell style={{ fontWeight: 'bold' }}>Nome</TableCell>
-                            <TableCell style={{ fontWeight: 'bold' }}>Preço</TableCell>
-                            <TableCell style={{ fontWeight: 'bold' }}>Categoria</TableCell>
                             <TableCell style={{ fontWeight: 'bold' }}>Editar</TableCell>
+                            <TableCell style={{ fontWeight: 'bold' }}>Excluir</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {products && products.map(product => (
+                        {categories && categories.map(category => (
                             <TableRow
-                                key={product.id}
+                                key={category.id}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row">
-                                    <Img src={product.url} alt='imagem-do-serviço' />
-                                </TableCell>
-                                <TableCell>{product.name}</TableCell>
-                                <TableCell>{formatCurrency(product.price)}</TableCell>
+                                <TableCell>{category.name}</TableCell>
                                 <TableCell>
-                                    {typeof product.category === 'string'
-                                        ? product.category
-                                        : product.category?.name
-                                    }
+                                    <EditIconStyle onClick={() => editCategory(category)}/>
                                 </TableCell>
                                 <TableCell>
-                                    <EditIconStyle onClick={() => editProduct(product)}/>
+                                    <img style={{cursor: 'pointer'}} src={Trash} onClick={() => deleteCategory(category.id)}/>
                                 </TableCell>
                             </TableRow>
                         ))}
@@ -82,4 +91,4 @@ function ListProducts() {
     )
 }
 
-export default ListProducts
+export default ListCategories

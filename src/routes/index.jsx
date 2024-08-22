@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Login, Register, Home, Cart, Admin } from "../containers";
 import PrivateRoute from "./private-route";
+import {paths} from '../constants/paths'
 
 export const router = createBrowserRouter([
     {
@@ -29,7 +30,7 @@ export const router = createBrowserRouter([
     },
 
     {
-        path: '/agendamentos',
+        path: paths.Schedules,
         element: (
             <PrivateRoute isAdmin>
                 <Admin />
@@ -38,7 +39,79 @@ export const router = createBrowserRouter([
     },
 
     {
-        path: '/listar-serviços',
+        path: paths.Products,
+        element: (
+            <PrivateRoute isAdmin>
+                <Admin />
+            </PrivateRoute>
+        )
+    },
+
+    {
+        path: paths.NewProduct,
+        element: (
+            <PrivateRoute isAdmin>
+                <Admin />
+            </PrivateRoute>
+        )
+    },
+
+    {
+        path: paths.EditProduct,
+        element: (
+            <PrivateRoute isAdmin>
+                <Admin />
+            </PrivateRoute>
+        )
+    },
+
+    {
+        path: paths.NewDate,
+        element: (
+            <PrivateRoute isAdmin>
+                <Admin />
+            </PrivateRoute>
+        )
+    },
+
+    {
+        path: paths.NewTime,
+        element: (
+            <PrivateRoute isAdmin>
+                <Admin />
+            </PrivateRoute>
+        )
+    },
+
+    {
+        path: paths.ListCategories,
+        element: (
+            <PrivateRoute isAdmin>
+                <Admin />
+            </PrivateRoute>
+        )
+    },
+
+    {
+        path: paths.EditCategory,
+        element: (
+            <PrivateRoute isAdmin>
+                <Admin />
+            </PrivateRoute>
+        )
+    },
+
+    {
+        path: paths.NewCategory,
+        element: (
+            <PrivateRoute isAdmin>
+                <Admin />
+            </PrivateRoute>
+        )
+    },
+
+    {
+        path: paths.ListUsers,
         element: (
             <PrivateRoute isAdmin>
                 <Admin />

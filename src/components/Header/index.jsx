@@ -23,11 +23,6 @@ export function Header(){
     const { logout, userData } = useUser()
     const {cartProducts} = useCart([])
 
-    // const {
-    //     push,
-    //     location: {pathname}
-    // } = useNavigate()
-
     const navigate = useNavigate()
     const location = useLocation()
 
@@ -52,10 +47,8 @@ export function Header(){
             <ContainerRight>
                 <PageLink onClick={() => navigate('/carrinho')}>
                     <img src={Cart} alt='carrinho' />
-                    {cartQuantity > 0 ? (
+                    {cartQuantity > 0 && 
                             <p>{cartQuantity}</p>
-                        )
-                            : ( <p style={{background: 'transparent'}}></p>)
                     }
                     
                 </PageLink>
@@ -64,7 +57,7 @@ export function Header(){
                     <img src={Person} alt='logo-pessoa' />
                 </PageLink>
                 <ContainerText>
-                    <p>Olá, {userData.name}</p>
+                    <p>Olá, {userData?.name || 'Usuário'}</p>
                     <PageLinkExit onClick={logoutUser}>Sair</PageLinkExit>
                 </ContainerText>
             </ContainerRight>

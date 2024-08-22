@@ -11,9 +11,9 @@ import GlobalStyles from './styles/globalStyles'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AppProvider>
+      <GlobalStyles />
       <RouterProvider router={router}/>
+      <ToastContainer autoClose={2000} theme='colored' />
     </AppProvider>
-    <GlobalStyles />
-    <ToastContainer autoClose={2000} theme='colored' />
   </React.StrictMode>,
 )

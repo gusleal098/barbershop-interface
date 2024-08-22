@@ -9,10 +9,31 @@ export const ContainerButton = styled.button`
     font-family: "Anton SC", sans-serif;
     font-size: 25px;
     color: #ffffff;
+    cursor: pointer;
 
     &:hover {
         background-color: #1f1f1f;
         border: 1px solid #ffffff;
+    }
+
+    @media (max-width: 1024px) { 
+        height: 45px;
+        font-size: 22px;
+    }
+
+    @media (max-width: 768px) { 
+        height: 40px;
+        font-size: 20px;
+    }
+
+    @media (max-width: 480px) { 
+        height: 36px;
+        font-size: 18px;
+    }
+
+    @media (max-width: 430px) {
+        height: 32px;
+        font-size: 16px;
     }
 `
 
@@ -25,4 +46,24 @@ export const ContainerButtonDisabled = styled.button`
     font-family: "Anton SC", sans-serif;
     font-size: 25px;
     color: #ffffff;
+
+    @media (max-width: 1024px) { 
+        height: 45px;
+        font-size: 22px;
+    }
+
+    @media (max-width: 768px) { 
+        height: 40px;
+        font-size: 20px;
+    }
+
+    @media (max-width: 480px) {
+        height: 36px;
+        font-size: 18px;
+    }
+
+    @media (max-width: 430px) {
+        height: 32px;
+        font-size: 16px;
+    }
 `

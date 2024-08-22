@@ -16,10 +16,8 @@ import {
     ContainerBody,
     HomeImg,
     CategoryButton,
-    CategoriesMenu,
     LeftContainer,
     RightContainer,
-    DatesMenu,
     DateButton,
     ProductsContainer,
     TimesContainer,
@@ -73,9 +71,7 @@ export function Home() {
             setDates(filteredDates)
 
             const todayDate = filteredDates.find(date => date.date === today)
-            // const todayDate = new Date().toISOString().split('T')[-0]
 
-            //const todayDate = data.find(date => date.date ===today)
             if (todayDate) {
                 setActiveDate(todayDate.id)
             } else if (filteredDates.length > 0) {
@@ -140,7 +136,7 @@ export function Home() {
     return (
         <Container>
             <HomeImg src={CapaHome} alt='Capa da home' />
-
+                
             <ContainerBody>                
                 <LeftContainer>
                     <Carousel itemsToShow={5} style={{width: '70%', marginTop: 30}} breakPoints={breakPoints}>

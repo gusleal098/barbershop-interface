@@ -6,23 +6,23 @@ const status = [
     },
     {
         id: 2,
-        label: 'Agendamento Realizado',
-        value: 'Agendamento realizado'
+        label: 'Realizado',
+        value: 'Realizado'
     },
     {
         id: 3,
-        label: 'Agendamento Confirmado',
-        value: 'Agendamento Confirmado'
+        label: 'Confirmado',
+        value: 'Confirmado'
     },
     {
         id: 4,
-        label: 'Agendamento Finalizado',
-        value: 'Agendamento Finalizado'
+        label: 'Finalizado',
+        value: 'Finalizado'
     },
     {
         id: 5,
-        label: 'Agendamento Cancelado',
-        value: 'Agendamento Cancelado'
+        label: 'Cancelado',
+        value: 'Cancelado'
     },
 ]
 

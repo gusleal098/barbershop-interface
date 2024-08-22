@@ -21,7 +21,8 @@ import status from './schedule-status';
 
 import {
     ProductsImg,
-    ReactSelectStyle
+    ReactSelectStyle,
+    WhatsAppIconStyle
 }
     from './styles'
 
@@ -36,7 +37,7 @@ function Row({ row, setSchedules, schedules }) {
             await api.put(`schedules/${id}`, { status })
 
             const newSchedules = schedules.map(schedule => {
-                return schedule._id === id ? {...schedule, status} : schedule
+                return schedule._id === id ? { ...schedule, status } : schedule
             })
 
             setSchedules(newSchedules)
@@ -59,11 +60,16 @@ function Row({ row, setSchedules, schedules }) {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row">
-                    {row.scheduleId}
-                </TableCell>
                 <TableCell>{row.name}</TableCell>
-                <TableCell>{row.number}</TableCell>
+                <TableCell>
+                    {row.number}
+                    <a
+                        href={`https://wa.me/${row.number}`}
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        <WhatsAppIconStyle />
+                    </a>
+                </TableCell>
                 <TableCell>{formatDateAgender(row.dateSchedule)}</TableCell>
                 <TableCell>
                     <ReactSelectStyle
@@ -71,7 +77,7 @@ function Row({ row, setSchedules, schedules }) {
                         menuPortalTarget={document.body}
                         placeholder='Status'
                         defaultValue={status.find(option => option.value === row.status || null)}
-                        onChange={ newStatus => {
+                        onChange={newStatus => {
                             setNewStatus(row.scheduleId, newStatus.value)
                         }}
                         isLoading={isLoading}

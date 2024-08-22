@@ -15,11 +15,21 @@ export const Container = styled.div `
         justify-content: space-between;
         min-width: 200px;
     }
+
+    @media (max-width: 768px) { 
+        height: 130px;
+        gap: 10px;
+    }
 `
 
 export const Image = styled.img `
     max-width: 150px;
     border-radius: 10px;
+
+    @media (max-width: 768px) { 
+        max-width: 100px;
+        max-height: 100px;
+    }
 `
 
 export const ProductName = styled.p `
@@ -29,6 +39,10 @@ export const ProductName = styled.p `
     line-height: 19px;
 
     color: #000000;
+
+    @media (max-width: 768px) { 
+        font-size: 14px;
+    }
 `
 
 export const ProductPrice = styled.p `
@@ -39,4 +53,9 @@ export const ProductPrice = styled.p `
     margin-top: 30px;
 
     color: #000000;
+
+    @media (max-width: 768px) { 
+        font-size: 16px;
+        margin-top: 10px;
+    }
 `

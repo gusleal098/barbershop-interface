@@ -105,7 +105,6 @@ function Schedules() {
                     <TableHead>
                         <TableRow>
                             <TableCell />
-                            <TableCell style={{ fontWeight: 'bold' }}>Id do Agendamento</TableCell>
                             <TableCell style={{ fontWeight: 'bold' }}>Cliente</TableCell>
                             <TableCell style={{ fontWeight: 'bold' }}>Número de Contato</TableCell>
                             <TableCell style={{ fontWeight: 'bold' }}>Data do Agendamento</TableCell>

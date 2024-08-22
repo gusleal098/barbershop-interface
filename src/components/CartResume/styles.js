@@ -59,5 +59,50 @@ export const Container = styled.div `
         text-align: center;
     }
 
+    @media (max-width: 820px) {
+        min-width: 100%;
+        max-width: 100%;
+
+        .container-top {
+            display: grid;
+            font-size: 18px;
+        }
+
+        .title {
+            font-size: 18px;
+
+        }
+    }
+
+    @media (max-width: 768px) {
+        min-width: 90%;
+        max-width: 100%;
+
+        .container-top {
+            display: grid;
+            grid-gap: 10px 320px;
+            font-size: 20px;
+        }
+
+        .title {
+            font-size: 40px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        min-width: 90%;
+        max-width: 900%;
+
+        .container-top {
+            display: grid;
+            grid-gap: 10px 100px;
+            font-size: 20px;
+        }
+
+        .title {
+            font-size: 23px;
+        }
+    }
+
 `
 
